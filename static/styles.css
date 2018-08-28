@@ -1,0 +1,96 @@
+:root {
+  --blue: #18172D;
+  --light-blue: #282745;
+  --dark-blue: #131224;
+  --border-radius: 6px;
+  --bright-blue: #28A3F1;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--blue);
+}
+
+.wrapper {
+  max-width: 900px;
+  margin: auto;
+}
+
+.hero {
+  height: calc(100vh - 100px); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 700px;
+}
+
+.hero .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav {
+  align-items: center;
+  display: flex;
+  height: 100px;
+  padding: 0 24px;
+  justify-content: space-between;
+}
+
+.logo {
+  padding: 0 24px;
+  margin: 0 -24px;
+}
+
+.btn {
+  align-items: center;
+  background-color: var(--light-blue);  
+  border-radius: var(--border-radius);
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  padding: 14px 18px;
+}
+
+.btn--github img {
+  margin-left: 8px;
+}
+
+
+.hero h1 {
+  color: white;
+  font-size: 50px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  margin-top: 0;
+  line-height: 60px;
+}
+
+.hero__phone img {
+  width: 300px;
+}
+
+h1 strong {
+  font-weight: 700;
+}
+
+
+
+.btn--primary {
+  background: var(--bright-blue);
+  box-shadow: 0 30px 60px -10px rgba(40, 163, 241, 0.25);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 18px 60px;
+  border-radius: 30px;
+}
+
+.features {
+  display: flex;
+  background: var(--dark-blue);
+  padding: 60px;
+  clip-path: polygon(100% 25%, 0% 100%, 100% 100%);
+
+}
