@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>chevron-right</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="lander" transform="translate(-860.000000, -1770.000000)" stroke="#FFFFFF" stroke-width="2">
+            <g id="Group-15" transform="translate(364.000000, 1560.000000)">
+                <g id="Group-14" transform="translate(0.000000, 74.000000)">
+                    <g id="Group-12" transform="translate(365.000000, 0.000000)">
+                        <g id="Group-11" transform="translate(39.000000, 32.000000)">
+                            <g id="Group-9" transform="translate(0.000000, 99.000000)">
+                                <g id="chevron-right" transform="translate(93.000000, 6.000000)">
+                                    <polyline id="Shape" points="0 12 6 6 0 0"></polyline>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

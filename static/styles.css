@@ -181,6 +181,21 @@ p {
   font-weight: 700;
 }
 
+.hero::after {
+  box-shadow: 0 50px 600px 100px var(--blue) inset;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  content: '';
+  top: -100px;
+  bottom: 0;
+}
+
+.hero {
+  position: relative;
+}
+
 .get-started p {
   font-size: 14px;
   color: white;

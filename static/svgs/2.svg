@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="56.4424813%" x2="50%" y2="97.7946527%" id="linearGradient-1">
+            <stop stop-color="#0F3D87" offset="0%"></stop>
+            <stop stop-color="#0A2858" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="19" width="26" height="16" rx="6"></rect>
+        <filter x="-96.2%" y="-125.0%" width="292.3%" height="412.5%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="5" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.340324955 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="8.46411396%" x2="50%" y2="98.8012839%" id="linearGradient-4">
+            <stop stop-color="#3C87FF" offset="0%"></stop>
+            <stop stop-color="#1D6FF0" offset="51.1560694%"></stop>
+            <stop stop-color="#1051B6" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#1563DE" offset="0%"></stop>
+            <stop stop-color="#1053BC" offset="95.7121568%"></stop>
+        </linearGradient>
+        <rect id="path-7" x="0" y="6.25" width="4" height="11"></rect>
+        <filter x="-25.0%" y="-9.1%" width="150.0%" height="118.2%" filterUnits="objectBoundingBox" id="filter-8">
+            <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.140851449 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-9">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#F0F0F0" offset="100%"></stop>
+        </linearGradient>
+        <path d="M12.5705534,14 L13.4294466,14 C14.4363954,14 14.9763797,14.1392384 15.4652686,14.4006991 C15.9541574,14.6621597 16.3378403,15.0458426 16.5993009,15.5347314 C16.8607616,16.0236203 17,16.5636046 17,17.5705534 L17,19.4294466 C17,20.4363954 16.8607616,20.9763797 16.5993009,21.4652686 C16.3378403,21.9541574 15.9541574,22.3378403 15.4652686,22.5993009 C14.9763797,22.8607616 14.4363954,23 13.4294466,23 L12.5705534,23 C11.5636046,23 11.0236203,22.8607616 10.5347314,22.5993009 C10.0458426,22.3378403 9.66215969,21.9541574 9.40069906,21.4652686 C9.13923842,20.9763797 9,20.4363954 9,19.4294466 L9,17.5705534 C9,16.5636046 9.13923842,16.0236203 9.40069906,15.5347314 C9.66215969,15.0458426 10.0458426,14.6621597 10.5347314,14.4006991 C11.0236203,14.1392384 11.5636046,14 12.5705534,14 Z M12.5,18 C11.6715729,18 11,18.6715729 11,19.5 C11,20.3284271 11.6715729,21 12.5,21 L13.5,21 C14.3284271,21 15,20.3284271 15,19.5 C15,18.6715729 14.3284271,18 13.5,18 L12.5,18 Z" id="path-10"></path>
+        <filter x="-193.8%" y="-150.0%" width="487.5%" height="444.4%" filterUnits="objectBoundingBox" id="filter-11">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.13524683 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter2"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter2" result="shadowBlurOuter2"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter2" in2="SourceAlpha" operator="out" result="shadowBlurOuter2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.150758605 0" type="matrix" in="shadowBlurOuter2" result="shadowMatrixOuter2"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="shadowMatrixOuter2"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(7.000000, 0.000000)" fill-rule="nonzero">
+            <g id="Rectangle">
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                <use fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+            </g>
+            <rect id="Rectangle-Copy-2" stroke="url(#linearGradient-5)" stroke-width="0.25" fill="url(#linearGradient-4)" x="0.125" y="6.125" width="25.75" height="23.75" rx="6"></rect>
+            <g id="Group" transform="translate(11.000000, 0.000000)">
+                <g id="Rectangle-3">
+                    <use fill="url(#linearGradient-6)" xlink:href="#path-7"></use>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-8)" xlink:href="#path-7"></use>
+                </g>
+            </g>
+            <g id="Rectangle-Copy">
+                <use fill="black" fill-opacity="1" filter="url(#filter-11)" xlink:href="#path-10"></use>
+                <path stroke="#EFEFEF" stroke-width="0.25" d="M12.5705534,14.125 C11.644937,14.125 11.1028121,14.2386396 10.5936813,14.5109257 C10.126576,14.7607364 9.76073637,15.126576 9.51092571,15.5936813 C9.2386396,16.1028121 9.125,16.644937 9.125,17.5705534 L9.125,19.4294466 C9.125,20.355063 9.2386396,20.8971879 9.51092571,21.4063187 C9.76073637,21.873424 10.126576,22.2392636 10.5936813,22.4890743 C11.1028121,22.7613604 11.644937,22.875 12.5705534,22.875 L13.4294466,22.875 C14.355063,22.875 14.8971879,22.7613604 15.4063187,22.4890743 C15.873424,22.2392636 16.2392636,21.873424 16.4890743,21.4063187 C16.7613604,20.8971879 16.875,20.355063 16.875,19.4294466 L16.875,17.5705534 C16.875,16.644937 16.7613604,16.1028121 16.4890743,15.5936813 C16.2392636,15.126576 15.873424,14.7607364 15.4063187,14.5109257 C14.8971879,14.2386396 14.355063,14.125 13.4294466,14.125 L12.5705534,14.125 Z M12.5,17.875 L13.5,17.875 C14.3974627,17.875 15.125,18.6025373 15.125,19.5 C15.125,20.3974627 14.3974627,21.125 13.5,21.125 L12.5,21.125 C11.6025373,21.125 10.875,20.3974627 10.875,19.5 C10.875,18.6025373 11.6025373,17.875 12.5,17.875 Z" stroke-linejoin="square" fill="url(#linearGradient-9)" fill-rule="evenodd"></path>
+            </g>
+        </g>
+    </g>
+</svg>
