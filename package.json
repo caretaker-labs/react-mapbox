@@ -9,7 +9,6 @@
   "private": false,
   "dependencies": {
     "@flip-inc/react-script": "^1.0.0",
-    "css-element-queries": "^1.0.2",
     "react": "^16.4.2"
   },
   "devDependencies": {
