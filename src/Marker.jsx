@@ -5,9 +5,8 @@ import { MapboxConsumer } from './Mapbox';
 
 type Props = {|
   children: Node,
-  isHighlighted: boolean,
-  latitude: number,
-  longitude: number,
+  lat: number,
+  lng: number,
   mapboxInstance: *,
 |};
 
@@ -19,10 +18,6 @@ type State = {|
 |};
 
 class Marker extends PureComponent<Props, State> {
-  static defaultProps = {
-    isHighlighted: false,
-  };
-
   state = {
     position: {
       x: 0,
@@ -36,7 +31,7 @@ class Marker extends PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.latitude !== this.props.latitude || prevProps.longitude !== this.props.longitude) {
+    if (prevProps.lat !== this.props.lat || prevProps.lng !== this.props.lng) {
       this.handleUpdatePosition();
     }
   }
@@ -49,7 +44,7 @@ class Marker extends PureComponent<Props, State> {
     if (!window.mapboxgl) return;
 
     const mapboxInstance = this.props.mapboxInstance;
-    const point = mapboxInstance.project(window.mapboxgl.LngLat.convert([this.props.longitude, this.props.latitude]));
+    const point = mapboxInstance.project(window.mapboxgl.LngLat.convert([this.props.lng, this.props.lat]));
 
     this.setState({
       position: {
@@ -66,7 +61,7 @@ class Marker extends PureComponent<Props, State> {
         style={{
           transform: `translate(${this.state.position.x}px, ${this.state.position.y}px) translate(0px, 0px) translate(-50%, -100%)`,
           WebkitBackfaceVisibility: 'hidden',
-          zIndex: this.props.isHighlighted ? 2 : 1,
+          zIndex: 1,
         }}>
         {this.props.children}
       </div>
