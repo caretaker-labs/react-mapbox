@@ -8,7 +8,7 @@ React Mapbox is a dead simple, performant, and easy to use React library for Map
 
 We aim to give you a dead simple set of basic map components to work with, and if you end up needing more advanced functionality you can fork it and [make your own](https://blog.mapbox.com/mapbox-gl-js-react-764da6cc074a).
 
-React Mapbox and it's one dependency React Script only rely on React, so the library is extremely lightweight. The Mapbox library itself is dynamically injected when needed, so this package won't affect bundle size on pages that don't need maps.
+React Mapbox and it's one dependency React Script only rely on React, so the library is extremely lightweight. The Mapbox library itself is dynamically injected when needed, so this package won't affect bundle size on views that don't need maps.
 
 ## Example
 ```javascript
