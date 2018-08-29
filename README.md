@@ -1,6 +1,6 @@
 # React Mapbox
 
-![npm Version](https://img.shields.io/badge/npm-v1.0.0-brightgreen.svg)
+![npm Version](https://img.shields.io/badge/npm-v1.0.0-blue.svg)
 ![Real Download Count (Very Real)](https://img.shields.io/badge/downloads-probably%20like%208%20billion-brightgreen.svg?longCache=true&style=flat)
 
 This reusable React component will manage all of your changes to the document head.
