@@ -1,7 +1,7 @@
 # React Mapbox
 
 [![npm Version](https://img.shields.io/npm/v/react-helmet.svg?style=flat-square)](https://www.npmjs.org/package/react-helmet)
-![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)
+![Real Download Count (Very Real)](https://img.shields.io/badge/downloads-literally--8--billion-green.svg?longCache=true&style=flat)
 
 This reusable React component will manage all of your changes to the document head.
 
