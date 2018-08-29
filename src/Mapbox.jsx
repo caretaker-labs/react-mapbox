@@ -1,76 +1,80 @@
 // @flow
 
-import React, { Component, type Node, Fragment } from 'react';
-import ResizeSensor from 'css-element-queries/src/ResizeSensor';
+import React, { PureComponent, type Node, Fragment } from 'react';
 import Script from '@flip-inc/react-script';
 
-const canUseDOM = () => !!(
-  typeof window !== 'undefined'
-  && window.document
-  && window.document.createElement
-);
+import type { EventResponse, Viewport } from './types';
 
-type Bounds = {|
-  maxLat: number,
-  maxLng: number,
-  minLat: number,
-  minLng: number,
-|};
+const { Provider, Consumer } = React.createContext();
 
-type Center = {|
-  lat: number,
-  lng: number,
-|};
+const enums = {
+  TransitionTypes: {
+    Ease: 'EASE',
+    Fly: 'FLY',
+    Jump: 'JUMP',
+  },
+};
 
 type Props = {|
-  onClick?: () => *,
-  onError: () => *,
-  onLoad: () => *,
-  onDragEnd?: ({
-    bounds: Bounds,
-    center: Center,
-  }) => *,
-  onMoveEnd?: ({
-    bounds: Bounds,
-    center: Center,
-  }) => *,
-  bounds: Bounds,
   children?: Node,
-  mapboxStyle: string,
+  mapbox: {|
+    accessToken: string,
+    style: string,
+  |},
+  onClick?: () => *,
+  onError?: () => *,
+  onLoad?: () => *,
+  onMoveEnd?: (EventResponse) => *,
+  onTouchEnd?: (EventResponse) => *,
+  transitionType: $Values<typeof enums.TransitionTypes>,
+  viewport: Viewport,
 |};
 
 type State = {|
-  isLoaded: boolean,
+  isReady: boolean,
 |};
 
-class Mapbox extends Component<Props, State> {
+class Mapbox extends PureComponent<Props, State> {
+  static enums = enums;
   static defaultProps = {
-    mapboxStyle: '',
-    onError: () => {},
-    onLoad: () => {},
+    transitionType: enums.TransitionTypes.Jump,
   };
 
   state = {
-    isLoaded: false,
+    isReady: false,
   };
 
   componentWillReceiveProps(nextProps: Props) {
     if (!window.mapboxgl || !window.mapboxInstance) return;
 
-    const mapboxInstance = window.mapboxInstance;
-    const bounds = this.props.bounds;
-    const nextBounds = nextProps.bounds;
-    if (
-      bounds.maxLat !== nextBounds.maxLat
-      || bounds.minLat !== nextBounds.minLat
-      || bounds.maxLng !== nextBounds.maxLng
-      || bounds.minLat !== nextBounds.minLat
-    ) {
-      const newBounds = new window.mapboxgl.LngLatBounds(
-        new window.mapboxgl.LngLat(nextBounds.minLng, nextBounds.minLat),
-        new window.mapboxgl.LngLat(nextBounds.maxLng, nextBounds.maxLat),
-      );
-      mapboxInstance.jumpTo(mapboxInstance.cameraForBounds(newBounds));
+    if (this.props.viewport !== nextProps.viewport) {
+      const mapboxInstance = window.mapboxInstance;
+      const cameraOptions: {
+        bearing?: number,
+        center: [number, number],
+        pitch?: number,
+        zoom: number,
+      } = {
+        center: [nextProps.viewport.center.lng, nextProps.viewport.center.lat],
+        zoom: nextProps.viewport.zoom,
+      };
+
+      if (nextProps.viewport.bearing) cameraOptions.bearing = nextProps.viewport.bearing;
+      if (nextProps.viewport.pitch) cameraOptions.pitch = nextProps.viewport.pitch;
+
+      switch (nextProps.transitionType) {
+        case enums.TransitionTypes.Fly: {
+          mapboxInstance.flyTo(cameraOptions);
+          break;
+        }
+        case enums.TransitionTypes.Ease: {
+          mapboxInstance.easeTo(cameraOptions);
+          break;
+        }
+        default: {
+          mapboxInstance.jumpTo(cameraOptions);
+        }
+      }
     }
   }
 
@@ -79,56 +83,38 @@ class Mapbox extends Component<Props, State> {
       window.mapboxInstance.remove();
       window.mapboxInstance = null;
     }
-
-    if (this.resizeSensor) {
-      this.resizeSensor.detach();
-      this.resizeSensor = null;
-    }
   }
 
-  handleMapLoad = () => {
-    this.setState({ isLoaded: true });
+  handleMapReady = () => {
+    this.setState({ isReady: true });
     if (this.props.onLoad) this.props.onLoad();
   };
 
-  handleMoveEnd = (event: { originalEvent: SyntheticEvent<HTMLButtonElement> }) => {
-    if (!window.mapboxInstance || !this.state.isLoaded) return;
+  handleMoveEnd = () => {
+    if (!window.mapboxInstance || !this.state.isReady) return;
 
-    const mapboxInstance = window.mapboxInstance;
-    const bounds = mapboxInstance.getBounds();
-    const center = mapboxInstance.getCenter().toArray();
-
-    const response = {
-      bounds: {
-        maxLat: bounds.getNorth(),
-        maxLng: bounds.getEast(),
-        minLat: bounds.getSouth(),
-        minLng: bounds.getWest(),
-      },
-      center: {
-        lat: center[1],
-        lng: center[0],
-      },
-    };
-
+    const response = this.getMapboxEventResponse();
     if (this.props.onMoveEnd) this.props.onMoveEnd(response);
-    if (event.originalEvent && this.props.onDragEnd) this.props.onDragEnd(response);
   };
 
-  handleResize = () => {
-    if (window.mapboxInstance) window.mapboxInstance.resize();
+  handleTouchEnd = () => {
+    if (!window.mapboxInstance || !this.state.isReady) return;
+
+    const response = this.getMapboxEventResponse();
+    if (this.props.onTouchEnd) this.props.onTouchEnd(response);
   };
 
   handleScriptLoad = () => {
     if (!this.isWebGLSupported()) return;
 
-    const mapContainerElement = document.getElementById('mapbox-container');
     const mapElement = document.getElementById('mapbox-map');
 
-    this.resizeSensor = new ResizeSensor(mapContainerElement, this.handleResize);
-
     if (window.mapboxInstance) {
-      this.handleMapLoad();
+      if (window.mapboxInstance.loaded()) {
+        this.handleMapReady();
+      } else {
+        window.mapboxInstance.once('load', this.handleMapReady);
+      }
 
       window.mapboxInstance.on('error', this.props.onError);
       window.mapboxInstance.on('moveend', this.handleMoveEnd);
@@ -136,25 +122,20 @@ class Mapbox extends Component<Props, State> {
       return;
     }
 
-    // window.mapboxgl.accessToken = Globals.MAPBOX_KEY;
-    const bounds = new window.mapboxgl.LngLatBounds(
-      new window.mapboxgl.LngLat(this.props.bounds.minLng, this.props.bounds.minLat),
-      new window.mapboxgl.LngLat(this.props.bounds.maxLng, this.props.bounds.maxLat),
-    );
+    window.mapboxgl.accessToken = this.props.mapbox.accessToken;
     window.mapboxInstance = new window.mapboxgl.Map({
       attributionControl: false,
-      center: bounds.getCenter().toArray(),
+      center: [this.props.viewport.center.lng, this.props.viewport.center.lat],
       container: mapElement,
       interactive: true,
-      style: this.props.mapboxStyle,
-      zoom: 10,
+      style: this.props.mapbox.style,
+      zoom: this.props.viewport.zoom,
     });
 
     const mapboxInstance = window.mapboxInstance;
-    const cameraOptions = mapboxInstance.cameraForBounds(bounds);
-    mapboxInstance.setZoom(cameraOptions.zoom);
-    mapboxInstance.once('load', this.handleMapLoad);
+    mapboxInstance.once('load', this.handleMapReady);
     mapboxInstance.on('error', this.props.onError);
+    mapboxInstance.on('touchend', this.handleTouchEnd);
     mapboxInstance.on('moveend', this.handleMoveEnd);
 
     // Disable outline style
@@ -168,7 +149,7 @@ class Mapbox extends Component<Props, State> {
         <Script
           onLoad={{
             react: this.handleScriptLoad,
-            preReact: this.generateOnScriptLoadString(),
+            preReact: this.generatePreReactInitializer(),
           }}
           url="https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js"
         />
@@ -194,17 +175,19 @@ class Mapbox extends Component<Props, State> {
             }}
             suppressHydrationWarning
           />
-          {canUseDOM && window.mapboxInstance && this.state.isLoaded ? this.props.children : null}
+          {this.state.isReady ? (
+            <Provider value={window.mapboxInstance}>
+              {this.props.children}
+            </Provider>
+          ) : null}
         </div>
       </Fragment>
     );
   }
 
-  resizeSensor = null;
-
   // This function is injected before React or rest of the app loads so that
   // the map is nearly ready by the time React is loaded
-  generateOnScriptLoadString = () => `
+  generatePreReactInitializer = () => `
     function () {
       function isWebGLSupported() {
         try {
@@ -218,30 +201,48 @@ class Mapbox extends Component<Props, State> {
       };
 
       if (isWebGLSupported()) {
-        window.mapboxgl.accessToken = '/* KEY GOES HERE */';
-
-        var bounds = new window.mapboxgl.LngLatBounds(
-          new window.mapboxgl.LngLat(${this.props.bounds.minLng}, ${this.props.bounds.minLat}),
-          new window.mapboxgl.LngLat(${this.props.bounds.maxLng}, ${this.props.bounds.maxLat})
-        );
+        window.mapboxgl.accessToken = ${this.props.mapbox.accessToken};
 
         window.mapboxInstance = new window.mapboxgl.Map({
           attributionControl: false,
-          center: bounds.getCenter().toArray(),
+          center: [${this.props.viewport.center.lng}, ${this.props.viewport.center.lat}],
           container: 'mapbox-map',
           interactive: true,
-          style: '${this.props.mapboxStyle}',
-          zoom: 10
+          style: '${this.props.mapbox.style}',
+          zoom: ${this.props.viewport.zoom}
         });
-
-        var cameraOptions = window.mapboxInstance.cameraForBounds(bounds);
-        window.mapboxInstance.setZoom(cameraOptions.zoom);
 
         var canvas = window.mapboxInstance.getCanvas();
         if (canvas) canvas.style.outline = 'none';
       }
     }
   `;
+
+  getMapboxEventResponse = () => {
+    const mapboxInstance = window.mapboxInstance;
+    const bounds = mapboxInstance.getBounds();
+    const center = mapboxInstance.getCenter().toArray();
+
+    return {
+      bearing: mapboxInstance.getBearing(),
+      bounds: {
+        northeast: {
+          lat: bounds.getNorth(),
+          lng: bounds.getEast(),
+        },
+        southwest: {
+          lat: bounds.getSouth(),
+          lng: bounds.getWest(),
+        },
+      },
+      center: {
+        lat: center[1],
+        lng: center[0],
+      },
+      pitch: mapboxInstance.getPitch(),
+      zoom: mapboxInstance.getZoom(),
+    };
+  };
 
   isWebGLSupported = () => {
     try {
@@ -255,4 +256,11 @@ class Mapbox extends Component<Props, State> {
   };
 }
 
+export const MapboxConsumer = (props: {|
+  children: React$Element<*>,
+|}) => (
+  <Consumer>
+    {value => React.cloneElement(props.children, { mapboxInstance: value })}
+  </Consumer>
+);
 export default Mapbox;

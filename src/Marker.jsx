@@ -1,13 +1,14 @@
 // @flow
-
-import PropTypes from 'prop-types';
 import React, { PureComponent, type Node } from 'react';
+
+import { MapboxConsumer } from './Mapbox';
 
 type Props = {|
   children: Node,
   isHighlighted: boolean,
   latitude: number,
   longitude: number,
+  mapboxInstance: *,
 |};
 
 type State = {|
@@ -17,10 +18,7 @@ type State = {|
   |},
 |};
 
-class MapboxMarker extends PureComponent<Props, State> {
-  static contextTypes = {
-    mapboxInstance: PropTypes.object,
-  };
+class Marker extends PureComponent<Props, State> {
   static defaultProps = {
     isHighlighted: false,
   };
@@ -33,7 +31,7 @@ class MapboxMarker extends PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    this.context.mapboxInstance.on('move', this.handleUpdatePosition);
+    this.props.mapboxInstance.on('move', this.handleUpdatePosition);
     this.handleUpdatePosition();
   }
 
@@ -44,13 +42,13 @@ class MapboxMarker extends PureComponent<Props, State> {
   }
 
   componentWillUnmount() {
-    this.context.mapboxInstance.off('move', this.handleUpdatePosition);
+    this.props.mapboxInstance.off('move', this.handleUpdatePosition);
   }
 
   handleUpdatePosition = () => {
     if (!window.mapboxgl) return;
 
-    const mapboxInstance = this.context.mapboxInstance;
+    const mapboxInstance = this.props.mapboxInstance;
     const point = mapboxInstance.project(window.mapboxgl.LngLat.convert([this.props.longitude, this.props.latitude]));
 
     this.setState({
@@ -78,4 +76,9 @@ class MapboxMarker extends PureComponent<Props, State> {
   marker = null;
 }
 
-export default MapboxMarker;
+const MarkerWithConsumer = (props: Props) => (
+  <MapboxConsumer>
+    <Marker {...props} />
+  </MapboxConsumer>
+);
+export default MarkerWithConsumer;

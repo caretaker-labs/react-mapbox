@@ -1,5 +1,4 @@
 // @flow
-export { default as MapboxMarker } from './components/MapboxMarker';
-export { default as MapboxRoute } from './components/MapboxRoute';
-export { default as MapboxZoomControl } from './components/MapboxZoomControl';
+export { default as Marker } from './Marker';
+export { default as ZoomControl } from './ZoomControl';
 export { default } from './Mapbox';
