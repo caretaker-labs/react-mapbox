@@ -54,6 +54,7 @@ React Mapbox supports several useful callbacks: `onClick`, `onError`, `onLoad`, 
 
 `onTouchEnd` and `onMoveEnd` pass the new map position details as a parameter:
 ```
+    {
       bearing: map.getBearing(),
       bounds: {
         northeast: {
@@ -71,6 +72,7 @@ React Mapbox supports several useful callbacks: `onClick`, `onError`, `onLoad`, 
       },
       pitch: map.getPitch(),
       zoom: map.getZoom(),
+    }
 ```
 
 `onLoad` fires when the map is fully loaded. It's hooked into the `load` event within mapbox-gl-js, which means the style has loaded and the map has rendered for the first time.
