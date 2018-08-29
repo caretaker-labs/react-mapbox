@@ -2,6 +2,7 @@
 
 ![npm Version](https://img.shields.io/badge/npm-v1.0.0-blue.svg)
 ![Real Download Count (Very Real)](https://img.shields.io/badge/downloads-probably%20like%208%20billion-brightgreen.svg?longCache=true&style=flat)
+![Very Real Test Coverage](https://img.shields.io/badge/coverage-yo%20this%20is%20tested%20as%20hell%20dw%20lmfao-red.svg)
 
 This reusable React component will manage all of your changes to the document head.
 
