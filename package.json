@@ -1,5 +1,5 @@
 {
-  "name": "@flip-inc/react-mapbox",
+  "name": "react-mapbox",
   "version": "1.0.0",
   "description": "A set of lightweight, performant server-renderable React components for Mapbox.",
   "main": "lib/index.js",
